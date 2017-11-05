@@ -1,0 +1,17 @@
+{
+  "name": "pcounter",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "debug": "node debug index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yukke.org",
+  "license": "MIT",
+  "dependencies": {
+    "node-hid": "^0.5.7",
+    "websocket": "^1.0.25"
+  }
+}
