@@ -11,6 +11,7 @@
   "author": "yukke.org",
   "license": "MIT",
   "dependencies": {
+    "http-server": "^0.10.0",
     "node-hid": "^0.5.7",
     "websocket": "^1.0.25"
   }
