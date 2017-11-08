@@ -2,7 +2,10 @@
 
 const http = require('http')
 const WebScoketServer = require('websocket').server
+const express = require('express')
+
 const UsbIO2 = require('./usbio2')
+
 
 
 class ConnectionPool {
@@ -19,10 +22,10 @@ class ConnectionPool {
 }
 
 function application() {
-    const server = http.createServer((request, response) => {
-        respomse.writeHead(404)
-        response.end()
-    })
+    const app = express()
+    app.use(express.static('client'))
+
+    const server = http.createServer(app)
     server.listen(18888, () => {
         console.log('Server is litening on port 18888')
     })
