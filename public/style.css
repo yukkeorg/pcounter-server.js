@@ -1,0 +1,45 @@
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+}
+
+.pcounter {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pcounter li {
+    margin-right: 1em;
+}
+
+.pcounter li:last-child  {
+    margin-right: 0;
+}
+
+.pcounter__label {
+    display: inline-block;
+}
+
+.pcounter__value {
+    display: inline-block;
+    width: 3em;
+    text-align: right;
+    border-bottom: 1px #999999 solid;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 2em;
+}
