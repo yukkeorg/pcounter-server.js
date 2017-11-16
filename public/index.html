@@ -1,23 +1,25 @@
 <!DOCTYPE html>
+<!-- vim: set ft=html st=2 sts=2 sw=2 : -->
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>PCounter</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>PCounter</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section class="container">
-        <ul class="pcounter">
-            <li class="pcounter__label">総回転数</li>
-            <li class="pcounter__value"><span id="pcount_total">0</span></li>
-            <li class="pcounter__label">ボーナス間</li>
-            <li class="pcounter__value"><span id="pcount_current">0</span></li>
-            <li class="pcounter__label">大当たり</li>
-            <li class="pcounter__value"><span id="pcount_bonus">0</span></li>
-            <li class="pcounter__label">継続</li>
-            <li class="pcounter__value"><span id="pcount_bonus_chain">0</span></li>
-        </ul>
-    </section>
-    <script src="pcounter_client.js"></script>
+  <section class="container">
+    <span>CR Stealth block.III</span>
+    <ul class="pcounter">
+      <li class="pcounter__label">Total</li>
+      <li class="pcounter__value" id="pcount_total">0</li>
+      <li class="pcounter__label">Current</li>
+      <li class="pcounter__value" id="pcount_current">0</li>
+      <li class="pcounter__label">Bonus</li>
+      <li class="pcounter__value" id="pcount_bonus">0</li>
+      <li class="pcounter__label">Bonus Chain</li>
+      <li class="pcounter__value" id="pcount_bonus_chain">0</li>
+    </ul>
+  </section>
+  <script src="pcounter_client.js"></script>
 </body>
 </html>

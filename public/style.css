@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:300,400');
+
 *, *:after, *:before {
     box-sizing: border-box;
 }
@@ -10,20 +12,42 @@ html {
 
 body {
     width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
 }
 
 .container {
+    font-family: 'Fira Sans Condensed', sans-serif;
     width: 100%;
+    color: #eeeeee;
+    background-color: #666666;
+    border-bottom: 1px solid #999999;
+    line-height: 1.3em;
+}
+
+.container:after {
+    content: "";
+    display: block;
+    clear: both;
 }
 
 .pcounter {
     display: table;
+    float: right;
+    /*
     margin-left: auto;
     margin-right: auto;
+    */
 }
 
-.pcounter li {
+.pcounter li {l
     margin-right: 1em;
+    vertical-align: middle;
 }
 
 .pcounter li:last-child  {
@@ -33,13 +57,14 @@ body {
 .pcounter__label {
     display: inline-block;
 }
+.pcounter__label:after {
+    content: ":";
+}
 
 .pcounter__value {
     display: inline-block;
-    width: 3em;
     text-align: right;
-    border-bottom: 1px #999999 solid;
     padding-left: 0.5em;
     padding-right: 0.5em;
-    font-size: 2em;
+    font-size: 1.3em;
 }
