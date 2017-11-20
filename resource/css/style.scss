@@ -1,5 +1,5 @@
 // vim: ft=sass ts=2 sts=2 sw=2
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:300,400');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:200,400');
 
 *, *:after, *:before {
   box-sizing: border-box;
@@ -15,6 +15,8 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+
+  font-family: 'Fira Sans Condensed', sans-serif;
 }
 
 ul {
@@ -29,45 +31,42 @@ ul {
 }
 
 .container {
-  font-family: 'Fira Sans Condensed', sans-serif;
-  width: 100%;
-  color: #eeeeee;
-  background-color: #666666;
-  border-bottom: 1px solid #999999;
-  line-height: 1.3em;
-
   &:after {
     @include clearfix;
   }
 }
 
 .pcounter {
-  display: table;
-  float: right;
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 15.5em;
+  color: #eeeeee;
+  background-color: #242424;
+  border: 1px solid #484848;
+  line-height: 1.55em;
+  padding: 0.8em;
+
+  list-style-type: none;
   // margin-left: auto;
   // margin-right: auto;
 
-  li {
-    margin-right: 1em;
-    vertical-align: middle;
+  &__title {
 
-    &:last-child {
-      margin-right: 0;
-    }
   }
 
   &__label {
-    display: inline-block;
-    &:after {
-      content: ":";
-    }
+    display: inline;
+    color: #888888;
   }
 
   &__value {
     display: inline-block;
+    padding-right: 0.5ex;
+    font-size: 1.8em;
+    font-weight: 200;
+    width: 6ex;
     text-align: right;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    font-size: 1.3em;
   }
 }
