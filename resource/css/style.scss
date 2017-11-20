@@ -1,0 +1,73 @@
+// vim: ft=sass ts=2 sts=2 sw=2
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:300,400');
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin clearfix() {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.container {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  width: 100%;
+  color: #eeeeee;
+  background-color: #666666;
+  border-bottom: 1px solid #999999;
+  line-height: 1.3em;
+
+  &:after {
+    @include clearfix;
+  }
+}
+
+.pcounter {
+  display: table;
+  float: right;
+  // margin-left: auto;
+  // margin-right: auto;
+
+  li {
+    margin-right: 1em;
+    vertical-align: middle;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__label {
+    display: inline-block;
+    &:after {
+      content: ":";
+    }
+  }
+
+  &__value {
+    display: inline-block;
+    text-align: right;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 1.3em;
+  }
+}

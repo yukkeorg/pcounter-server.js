@@ -1,3 +1,5 @@
+import '../css/style.scss'
+
 (($) => {
   // vim: ft=javascript ts=2 sts=2 sw=2
   "use strict"
