@@ -9,11 +9,13 @@
 
 html {
   width: 100%;
+  height: 100%;
 }
 
 body {
   width: 100%;
-
+  height: 100%;
+  overflow: hidden;
   font-family: 'Fira Sans Condensed', sans-serif;
 }
 
@@ -24,60 +26,81 @@ body {
   clear: both;
 }
 
-
 .hide {
-  display: none;
+  display: none !important;
 }
 
 $pc-bc: #242424;
+
 .pcounter {
   display: block;
   position: absolute;
-  right: 0.3em;
+  left: 0;
+  right: 0;
   bottom: 0.3em;
-  width: 15.5em;
+  width: 80%;
   color: #eeeeee;
   background-color: $pc-bc;
   border: 1px solid #484848;
+  border-radius: 5px;
   line-height: 1.55em;
+  margin: 0 auto;
   padding: 0.25em;
 
   ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 2em;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   &__title {
     font-size: 90%;
     text-align: center;
-    padding-bottom: 0.5em;
+    background-color: #343434;
   }
 
   &__status {
-    list-style-type: none;
-    // margin-left: auto;
-    // margin-right: auto;
   }
 
   &__label {
-    display: inline;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 400;
     color: #888888;
   }
 
   &__value {
     display: inline-block;
     padding-right: 0.5ex;
-    font-size: 1.8em;
-    font-weight: 200;
-    width: 50%;
-    text-align: right;
+    font-size: 1em;
+    font-weight: 400;
+    text-align: left;
   }
 }
 
 $normal-game-bgcolor: rgba(42, 237, 91, 100);
 .normal-game {
-  background: linear-gradient(to right, $normal-game-bgcolor 1%, $pc-bc 3%, $pc-bc 97%, $normal-game-bgcolor 99%);
+  &::before {
+    width: 1em;
+    background: linear-gradient(to right, $normal-game-bgcolor 1%, $pc-bc 2%);
+  }
+
+  &::after {
+    display: block;
+    background: linear-gradient(to left, $normal-game-bgcolor 1%, $pc-bc 2%);
+  }
 }
 
 $chancetime-bgcolor: #edcc29;
 .chance-time {
-  background: linear-gradient(to right, $chancetime-bgcolor 1%, $pc-bc 3%, $pc-bc 97%, $chancetime-bgcolor 99%);
+  background: linear-gradient(to right, $chancetime-bgcolor 1%, $pc-bc 2%, $pc-bc 99%, $chancetime-bgcolor 100%);
 }
