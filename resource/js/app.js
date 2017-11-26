@@ -1,51 +1,12 @@
 // vim: ft=javascript ts=2 sts=2 sw=2
-import '../css/style.scss'
-
 "use strict"
 
-function $(query, element) {
-  if(!element) element = document
-  return element.querySelector(query)
-}
+import '../css/style.scss'
 
-class AnimationCounter {
-  constructor(elem, duration=500, resolution=10) {
-    this.elem = elem
+import AnimationCounter from './animationcounter.js'
+import $ from './selector.js'
 
-    this.duration = duration
-    this.resolution = resolution
-    this.mspf = this.duration / this.resolution
-    this.progress = 0
-    this.current_value = 0
-    this.goal_value = 0
-    this.delta = 0
-  }
-
-  set_goal(value) {
-    this.goal_value = value
-    this.progress = 0
-
-    if(this.goal_value - this.current_value == 0) {
-      return
-    }
-
-    this.delta = (this.goal_value - this.current_value) / this.resolution
-    setTimeout(this._action.bind(this), this.mspf)
-  }
-
-  _action() {
-    this.progress += this.mspf
-    if(this.progress >= this.duration) {
-      this.current_value = this.goal_value
-    } else {
-      this.current_value += this.delta
-      setTimeout(this._action.bind(this), this.mspf)
-    }
-    this.elem.innerHTML = Math.floor(this.current_value)
-  }
-}
-
-const p_counter = $('#pcounter')
+const p_title = $('#pcount_title')
 const p_total = $('#pcount_total')
 const p_current = $('#pcount_current')
 const p_bonus = $('#pcount_bonus')
@@ -54,19 +15,36 @@ const p_points = new AnimationCounter($('#pcount_points'), 500, 20)
 
 const ws = new WebSocket('ws://localhost:18888')
 ws.addEventListener('message', (message) => {
-  let c_status = JSON.parse(message.data)
+  const json = JSON.parse(message.data)
 
-  p_total.innerHTML = c_status.total
-  p_current.innerHTML = c_status.current
-  p_bonus.innerHTML = c_status.bonus
-  p_bonus_chain.innerHTML = c_status.bonus_chain
-  p_points.set_goal(c_status.bonus * 1000)
+  if(!('type' in json)) {
+    return
+  }
 
-  if(c_status.is_chancetime) {
-    p_counter.classList.remove('normal-game')
-    p_counter.classList.add('chance-time')
-  } else {
-    p_counter.classList.remove('chance-time')
-    p_counter.classList.add('normal-game')
+  switch(json.type) {
+    case "counter":
+      p_total.innerHTML = json.total
+      p_current.innerHTML = json.current
+      p_bonus.innerHTML = json.bonus
+      p_bonus_chain.innerHTML = json.bonus_chain
+      //p_points.set_goal(json.bonus * 1000)
+
+      if(json.is_bonustime) {
+        p_current.classList.add('chance-time')
+      } else {
+        p_current.classList.remove('chance-time')
+      }
+      if(json.is_chancetime) {
+        p_bonus.classList.add('chance-time')
+      } else {
+        p_bonus.classList.remove('chance-time')
+      }
+      break
+
+    case "title":
+      if('title' in json) {
+        p_title.innerHTML = json.title
+      }
+      break
   }
 })
