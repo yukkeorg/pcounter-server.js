@@ -87,20 +87,14 @@ $pc-bc: #242424;
   }
 }
 
-$normal-game-bgcolor: rgba(42, 237, 91, 100);
-.normal-game {
-  &::before {
-    width: 1em;
-    background: linear-gradient(to right, $normal-game-bgcolor 1%, $pc-bc 2%);
-  }
-
-  &::after {
-    display: block;
-    background: linear-gradient(to left, $normal-game-bgcolor 1%, $pc-bc 2%);
-  }
+$chancetime-color: #edcc29;
+.chance-time {
+  color: $chancetime-color;
+  animation: blink 1s step-end infinite;
 }
 
-$chancetime-bgcolor: #edcc29;
-.chance-time {
-  background: linear-gradient(to right, $chancetime-bgcolor 1%, $pc-bc 2%, $pc-bc 99%, $chancetime-bgcolor 100%);
+@keyframes blink {
+  75% {
+    opacity: 0.0;
+  }
 }
