@@ -26,6 +26,7 @@
     "websocket": "^1.0.25"
   },
   "devDependencies": {
+    "bourbon": "^4.3.4",
     "webpack": "^3.8.1"
   }
 }

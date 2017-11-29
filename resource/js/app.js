@@ -27,7 +27,6 @@ ws.addEventListener('message', (message) => {
       p_current.innerHTML = json.current
       p_bonus.innerHTML = json.bonus
       p_bonus_chain.innerHTML = json.bonus_chain
-      //p_points.set_goal(json.bonus * 1000)
 
       if(json.is_bonustime) {
         p_current.classList.add('chance-time')

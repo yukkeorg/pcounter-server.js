@@ -34,7 +34,16 @@ module.exports = (options) => {
         },
         {
           test: /\.scss/,
-          use: ['style-loader', 'css-loader', 'sass-loader']
+          use: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: require('bourbon').includePaths,
+              }
+            }
+          ]
         },
         {
           test: /\.(png|git|jpe?g)$/,
@@ -47,6 +56,10 @@ module.exports = (options) => {
         path: './public/js',
         prettyPring: true,
       }),
-    ]
+      new webpack.LoaderOptionsPlugin({
+        options: {
+        }
+      })
+    ],
   }
 }

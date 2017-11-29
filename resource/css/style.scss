@@ -1,49 +1,28 @@
 // vim: ft=sass ts=2 sts=2 sw=2
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:400,500');
 
-*, *:after, *:before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: 'Fira Sans Condensed', sans-serif;
-}
-
-
-@mixin clearfix() {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.hide {
-  display: none !important;
-}
+@import "bourbon";
+@import "_init";
+@import "_utility";
 
 $pc-bc: #242424;
 
 .pcounter {
   display: flex;
+
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0.3em;
+
   width: 80%;
+  line-height: 1.55em;
+
   color: #eeeeee;
   background-color: $pc-bc;
   border: 1px solid #484848;
   border-radius: 5px;
-  line-height: 1.55em;
+
   margin: 0 auto;
   padding: 0.25em;
 
