@@ -1,5 +1,6 @@
 'use strict'
 
+process.env["NODE_CONFIG_DIR"] = __dirname + "/../config/";
 const config = require('config')
 const path = require('path')
 

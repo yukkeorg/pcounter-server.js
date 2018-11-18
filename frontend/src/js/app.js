@@ -14,6 +14,7 @@ const p_bonus_chain = $('#pcount_bonus_chain')
 const p_points = new AnimationCounter($('#pcount_points'), 500, 20)
 
 const ws = new WebSocket('ws://localhost:18888')
+
 ws.addEventListener('message', (message) => {
   const json = JSON.parse(message.data)
 
