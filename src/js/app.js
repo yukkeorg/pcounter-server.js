@@ -1,7 +1,7 @@
 // vim: ft=javascript ts=2 sts=2 sw=2
 "use strict"
 
-import '../css/style.scss'
+import '../scss/style.scss'
 
 import AnimationCounter from './animationcounter.js'
 import $ from './selector.js'

@@ -1,33 +1,22 @@
 {
-  "name": "pcounter",
+  "name": "pcounter.js_frontend",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack && node index.js",
-    "debug": "node debug index.js",
+    "start": "parcel src/index.html -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yukke.org",
   "license": "MIT",
   "dependencies": {
-    "assets-webpack-plugin": "^3.9.7",
     "@babel/cli": "",
     "@babel/core": "",
     "@babel/preset-env": "",
-    "babel-loader": "",
-    "config": "^1.31.0",
-    "css-loader": "^0.28.11",
-    "express": "^4.16.4",
-    "file-loader": "^1.1.11",
-    "node-hid": "",
-    "node-sass": "^4.10.0",
-    "sass-loader": "^6.0.7",
-    "style-loader": "^0.19.1",
-    "websocket": "^1.0.28"
+    "bourbon": "^4.3.4"
   },
   "devDependencies": {
-    "bourbon": "^4.3.4",
-    "webpack": "^3.12.0"
+    "cross-env": "^5.2.0",
+    "parcel-bundler": "^1.10.3"
   }
 }
