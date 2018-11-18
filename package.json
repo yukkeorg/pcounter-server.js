@@ -11,22 +11,23 @@
   "author": "yukke.org",
   "license": "MIT",
   "dependencies": {
-    "assets-webpack-plugin": "^3.5.1",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "config": "^1.28.1",
-    "css-loader": "^0.28.7",
-    "express": "^4.16.2",
-    "file-loader": "^1.1.5",
-    "node-hid": "^0.5.7",
-    "node-sass": "^4.7.1",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
-    "websocket": "^1.0.25"
+    "assets-webpack-plugin": "^3.9.7",
+    "@babel/cli": "",
+    "@babel/core": "",
+    "@babel/preset-env": "",
+    "babel-loader": "",
+    "config": "^1.31.0",
+    "css-loader": "^0.28.11",
+    "express": "^4.16.4",
+    "file-loader": "^1.1.11",
+    "node-hid": "",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.19.1",
+    "websocket": "^1.0.28"
   },
   "devDependencies": {
     "bourbon": "^4.3.4",
-    "webpack": "^3.8.1"
+    "webpack": "^3.12.0"
   }
 }
