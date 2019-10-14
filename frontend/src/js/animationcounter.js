@@ -20,6 +20,7 @@ export class AnimationCounter {
     }
 
     this.delta = (this.goal_value - this.current_value) / this.resolution
+
     setTimeout(this._action.bind(this), this.mspf)
   }
 
