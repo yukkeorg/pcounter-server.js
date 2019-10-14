@@ -1,6 +1,4 @@
-"use strict"
-
-class AnimationCounter {
+export class AnimationCounter {
   constructor(elem, duration=500, resolution=10) {
     this.elem = elem
 
@@ -36,5 +34,3 @@ class AnimationCounter {
     this.elem.innerHTML = Math.floor(this.current_value)
   }
 }
-
-module.exports = AnimationCounter

@@ -1,5 +1,4 @@
 // vim: ft=javascript ts=2 sts=2 sw=2
-"use strict"
 
 import '../scss/style.scss'
 
@@ -17,7 +16,6 @@ const ws = new WebSocket('ws://localhost:18888')
 
 ws.addEventListener('message', (message) => {
   const json = JSON.parse(message.data)
-
   if(!('type' in json)) {
     return
   }

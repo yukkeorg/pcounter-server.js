@@ -1,3 +1,2 @@
-'use strict'
-
-require('./lib/app')()
+import App from './app'
+App().run()

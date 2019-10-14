@@ -1,4 +1,4 @@
-module.exports = {
+export const Config = {
     server: {
         port: 18888,
         client_dir: "./public"

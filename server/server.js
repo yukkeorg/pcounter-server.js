@@ -1,11 +1,10 @@
-'use strict'
+import http from "http"
+import ws from "WebScoketServer"
+import express from "express"
 
-const http = require('http')
-const WebScoketServer = require('websocket').server
-const express = require('express')
+const WebScoketServer = ws.server()
 
-
-class Server {
+export class Server {
     constructor(port=18888, client_dir) {
         this.port = port
         this.client_dir = client_dir
@@ -34,6 +33,7 @@ class Server {
         }
         console.log('client source path: ' + this.client_dir)
 
+        // Websocket request message
         this.wsServer.on('request', (request) => {
             let wsconn = request.accept(null, request.origin)
             wsconn.id = this._wsconn_id++
@@ -43,6 +43,8 @@ class Server {
             }
             console.log(`Connected: from ${request.host} ConnID: ${wsconn.id}`)
         })
+
+        // Websocket close message
         this.wsServer.on('close', (wsconn, closeReason, description) => {
             if(wsconn.id in this.wsconn_pool) {
                 wsconn.close()
@@ -65,6 +67,4 @@ class Server {
         })
     }
 }
-
-module.exports = Server
 

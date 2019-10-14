@@ -1,11 +1,8 @@
-'use strict'
+import EventEmmiter from 'events'
+import HID from 'node-hid'
 
-const EventEmmiter = require('events')
-const HID = require('node-hid')
-
-
-class UsbIO2 extends EventEmmiter {
-    constructor(interval=100) {
+export class UsbIO2 extends EventEmmiter {
+    constructor(interval=100 /* ms */) {
         super()
 
         this.inspect_interval = interval  // unit: ms
@@ -47,5 +44,3 @@ class UsbIO2 extends EventEmmiter {
         setTimeout(this._inspect.bind(this), this.inspect_interval)
     }
 }
-
-module.exports = UsbIO2
