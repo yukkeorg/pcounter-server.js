@@ -1,2 +1,2 @@
-import App from './app'
-App().run()
+import App from './app';
+App().run();

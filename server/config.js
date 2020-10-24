@@ -8,5 +8,5 @@ export const Config = {
         bonus: 0x02,
         chance_time: 0x04,
     }
-}
+};
 
