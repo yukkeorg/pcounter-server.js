@@ -4,27 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel frontend/src/index.html -d public && node server/index.js",
-    "build": "parcel build frontend/src/index.html -d public",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build:frontend; npm run backend",
+    "build:frontend": "parcel build ./frontend/src/index.html -d public",
+    "backend": "node server/index.js"
   },
   "author": "yukke.org",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "config": "^1.31.0",
     "express": "^4.17.1",
+    "log4js": "^6.3.0",
     "node-hid": "^0.7.9",
-    "websocket": "^1.0.30"
+    "websocket": "^1.0.32"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.3.3",
-    "@typescript-eslint/parser": "^2.3.3",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
     "cross-env": "^5.2.1",
-    "eslint": "^6.5.1",
+    "eslint": "^6.8.0",
     "parcel-bundler": "^1.12.4",
-    "sass": "^1.23.0"
+    "sass": "^1.27.0"
   }
 }

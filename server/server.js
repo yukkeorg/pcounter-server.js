@@ -1,71 +1,61 @@
-import http from "http";
-import ws from "WebScoketServer";
-import express from "express";
+'use strict';
 
-const WebScoketServer = ws.server();
+const log4js = require("log4js");
+const http = require("http");
+const express = require("express");
+const WebSocket = require("ws");
 
-export class Server {
-    constructor(port=18888, client_dir) {
-        this.port = port;
-        this.client_dir = client_dir;
+const logger = log4js.getLogger();
 
-        this.app = express();
-        this.server = http.createServer(this.app);
-        this.wsServer = new WebScoketServer({
-            httpServer: this.server,
-            autoAcceptConnections: false,
+
+class Server {
+  constructor(public_dir, port=18888) {
+    this.port = port;
+    this.public_dir = public_dir;
+
+    this.app = null;
+    this.server = null;
+    this.wsServer = null;
+  }
+
+  setup(options) {
+    this.app = express();
+    this.app.use(express.static(this.public_dir));
+    this.app.use(express.json());
+    for(const method of ['get', 'post', 'put', 'delete']) {
+      if(method in options) {
+        const routes = options[method];
+        Object.keys(routes).forEach((key) => {
+          this.app[method](key, routes[key]);
         });
-
-        this.wsconn_pool = {};
-        this._wsconn_id = 0;
+      }
     }
 
-    setup(options) {
-        this.app.use(express.static(this.client_dir));
-        this.app.use(express.json());
+    this.httpServer = http.createServer(this.app);
+    this.httpServer.listen(this.port, () => {
+      logger.info(`Server is litening on port ${this.port}`);
+    });
+    logger.info('Static file path: ' + this.public_dir);
 
-        for(const method of ['get', 'post', 'put', 'delete']) {
-            if(method in options) {
-                const routes = options[method]
-                Object.keys(routes).forEach((key) => {
-                    this.app[method](key, routes[key]);
-                })
-            }
-        }
-        console.log('client source path: ' + this.client_dir);
 
-        // Websocket request message
-        this.wsServer.on('request', (request) => {
-            let wsconn = request.accept(null, request.origin);
-            wsconn.id = this._wsconn_id++;
-            this.wsconn_pool[wsconn.id] = wsconn;
-            if(options.on_ws_connected) {
-                options.on_ws_connected(wsconn);
-            }
-            console.log(`Connected: from ${request.host} ConnID: ${wsconn.id}`);
-        })
+    this.wsServer = new WebSocket.Server({server: this.httpServer});
+    // Websocket request message
+    this.wsServer.on('connection', (ws, req) => {
+      if(options.on_ws_connected) {
+        options.on_ws_connected(ws);
+      }
+      logger.info("Client Connected");
+    });
+  }
 
-        // Websocket close message
-        this.wsServer.on('close', (wsconn, closeReason, description) => {
-            if(wsconn.id in this.wsconn_pool) {
-                wsconn.close();
-                delete this.wsconn_pool[wsconn.id];
-                console.log(`Disconnected: ConnID: ${wsconn.id}`);
-            }
-        })
-
-        this.server.listen(this.port, () => {
-            console.log(`Server is litening on port ${this.port}`);
-        })
-    }
-
-    sendTextToClients(data) {
-        Object.keys(this.wsconn_pool).forEach(key => {
-            const wsconn = this.wsconn_pool[key]
-            if(wsconn && wsconn.connected) {
-                wsconn.sendUTF(data);
-            }
-        })
-    }
+  sendTextToClients(data) {
+    this.wsServer.clients.forEach((client) => {
+      if(client !== this.wsServer &&
+         client.readyState === WebSocket.OPEN) {
+        client.send(data);
+      }
+    });
+  }
 }
 
+module.exports = Server;
