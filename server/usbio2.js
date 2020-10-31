@@ -45,6 +45,7 @@ class UsbIO2 extends EventEmmiter {
       this.setup(detected[0].path);
     if(detected_devices.length > 0) {
       logger.info("USB-IO2.0 is detected.");
+      setTimeout(()=>this.setup(detected_devices[0].path), 1000);
     } else {
       logger.debug("Waiting for to connect USB-IO2.0.");
       setTimeout(this.detect.bind(this), 100);
