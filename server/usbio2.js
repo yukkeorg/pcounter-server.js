@@ -26,6 +26,7 @@ class UsbIO2 extends EventEmmiter {
     super();
 
     this.inspect_interval = interval;  // unit: ms
+    this.inspect_interval_id = -1;
     this.device = null;
     this._prev_data = null;
   }
@@ -58,10 +59,19 @@ class UsbIO2 extends EventEmmiter {
       this.device = new HID.HID(USBIO20_VENDORID, USBIO20_PRODUCTID);
     }
     this.device.on('data', this._on_data.bind(this));
-    this._inspect();
+    this.inspect_interval_id = setInterval(() => {
+      try {
+        this.device.write(USBIO20_RW_CMD);
+      } catch(e) {
+        logger.warn(`Ignore exception: ${e}`)
+      }
+    }, this.inspect_interval);
   }
 
   close() {
+    if(this.inspect_interval_id >= 0) {
+      clearInterval(this.inspect_interval_id);
+    }
     this.device.close();
   }
 
@@ -85,15 +95,6 @@ class UsbIO2 extends EventEmmiter {
 
       this._prev_data = now_data;
     }
-  }
-
-  _inspect() {
-    try {
-      this.device.write(USBIO20_RW_CMD);
-    } catch(e) {
-      logger.warn(`Ignore exception: ${e}`)
-    }
-    setTimeout(this._inspect.bind(this), this.inspect_interval);
   }
 }
 
