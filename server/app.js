@@ -1,5 +1,6 @@
 'use strict';
 
+const util  = require('util');
 const log4js = require('log4js');
 const config = require('./config');
 const Server = require('./server');
@@ -22,7 +23,7 @@ class App {
   }
 
   run() {
-    logger.info("starting pcounter.js");
+    logger.info("Start pcounter.js backend");
 
     const server = new Server(
       config.server.client_dir,
@@ -33,6 +34,7 @@ class App {
       get: {
         '/export': (req, res) => {
           res.json(this.counter_data);
+          res.sendStatus(200);
         }
       },
       post: {
@@ -63,18 +65,21 @@ class App {
 
       if(onbits & CHANCETIME_PORT) {
         this.counter_data.is_chancetime = true;
-        changed = true
+        changed = true;
       }
+
       if(offbits & CHANCETIME_PORT) {
         this.counter_data.is_chancetime = false;
         this.counter_data.bonus_chain = 0;
         changed = true;
       }
+
       if(onbits & GAMECNT_PORT) {
         this.counter_data.total++;
         this.counter_data.current++;
         changed = true;
       }
+
       if(onbits & BONUS_PORT) {
         this.counter_data.bonus++;
         this.counter_data.is_bonustime = true;
@@ -83,6 +88,7 @@ class App {
         }
         changed = true;
       }
+
       if(offbits & BONUS_PORT) {
         this.counter_data.current = 0;
         this.counter_data.is_bonustime = false;
@@ -91,7 +97,7 @@ class App {
 
       if(changed) {
         server.sendTextToClients(JSON.stringify(this.counter_data));
-        logger.debug("SEND: " + this.counter_data);
+        logger.debug("SEND: " + util.inspect(this.counter_data));
       }
     });
   }

@@ -1,7 +1,9 @@
 'use strict';
-const {format} = require('util');
+
+const util = require('util');
 const EventEmmiter = require('events');
 const log4js = require('log4js');
+
 const HID = require('node-hid');
 
 const logger = log4js.getLogger();
@@ -33,6 +35,7 @@ class UsbIO2 extends EventEmmiter {
 
   detect() {
     if(this.device != null) {
+      logger.info("USB-IO2.0 has been detected alredy.");
       return;
     }
 
@@ -42,7 +45,6 @@ class UsbIO2 extends EventEmmiter {
               (d.productId === USBIO20_PRODUCTID_ORIG ||
                d.productId === USBIO20_PRODUCTID_AKI))
     });
-      this.setup(detected[0].path);
     if(detected_devices.length > 0) {
       logger.info("USB-IO2.0 is detected.");
       setTimeout(()=>this.setup(detected_devices[0].path), 1000);
@@ -52,9 +54,10 @@ class UsbIO2 extends EventEmmiter {
     }
   }
 
-  setup(path = null) {
+  setup(path=null) {
     if(path != null) {
       this.device = new HID.HID(path);
+      logger.debug("Device: " + util.inspect(this.device, null, 5));
     } else {
       // USB-IO2.0 = VendorID: 0x1352, ProductID:0x0120
       this.device = new HID.HID(USBIO20_VENDORID, USBIO20_PRODUCTID);

@@ -1,7 +1,7 @@
 module.exports = {
   server: {
     port: 18888,
-    client_dir: "./public"
+    client_dir: "./public",
   },
   port: {
     game: 0x01,
