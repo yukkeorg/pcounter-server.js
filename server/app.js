@@ -41,17 +41,10 @@ class App {
             if(key in this.counter_data) {
               this.counter_data[key] = req.body[key];
             }
-          })
+          });
           server.sendTextToClients(JSON.stringify(this.counter_data));
           res.sendStatus(200);
         },
-        '/set_title': (req, res) => {
-          if ('title' in req.body) {
-            this.title_data.title = req.body.titleS;
-            server.sendTextToClients(JSON.stringify(this.title_data));
-          }
-          res.sendStatus(200)
-        }
       },
       on_ws_connected: (ws) => {
         ws.send(JSON.stringify(this.counter_data));
