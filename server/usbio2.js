@@ -37,14 +37,14 @@ class UsbIO2 extends EventEmmiter {
     }
 
     const devices = HID.devices();
-    const detected = devices.filter(d => {
+    const detected_devices = devices.filter(d => {
       return (d.vendorId === USBIO20_VENDORID &&
               (d.productId === USBIO20_PRODUCTID_ORIG ||
                d.productId === USBIO20_PRODUCTID_AKI))
     });
-    if(detected.length > 0) {
-      logger.info("USB-IO2.0 detected.");
       this.setup(detected[0].path);
+    if(detected_devices.length > 0) {
+      logger.info("USB-IO2.0 is detected.");
     } else {
       logger.debug("Waiting for to connect USB-IO2.0.");
       setTimeout(this.detect.bind(this), 100);
